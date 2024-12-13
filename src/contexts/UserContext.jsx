@@ -3,21 +3,19 @@ import { createContext, useContext, useState } from 'react';
 // # CREO UN NUOVO CONTESTO
 const UserContext = createContext();
 
-// # USO LE INFORMAZIONI (export per i consumers)
-export const useUserContext = () => useContext(UserContext);
-
-// # FORNISCO LE INFORMAZIONI (export per il provider)
+// # EXPORT DEL PROVIDER
 export const UserContextProvider = ({ children }) => {
+  // update "isGuest" to false
   const login = () => {
-    const newContextData = { ...globalData, isGuest: false };
-    setGlobalData(newContextData);
+    setGlobalData({ ...globalData, isGuest: false });
   };
 
+  // update "isGuest" to true
   const logout = () => {
-    const newContextData = { ...globalData, isGuest: true };
-    setGlobalData(newContextData);
+    setGlobalData({ ...globalData, isGuest: true });
   };
 
+  // object representing the userContext
   const [globalData, setGlobalData] = useState({
     isGuest: true,
     username: 'Tizz',
@@ -25,5 +23,12 @@ export const UserContextProvider = ({ children }) => {
     logout,
   });
 
+  // return user context provider
   return <UserContext.Provider value={globalData}>{children}</UserContext.Provider>;
+};
+
+// # EXPORT DEL CONTEXT PER I CONSUMERS
+export const userContext = () => {
+  // return object representing the userContext
+  return useContext(UserContext);
 };

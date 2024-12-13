@@ -1,8 +1,8 @@
 import { NavLink } from 'react-router-dom';
-import { useUserContext } from '../contexts/UserContext';
+import { userContext } from '../contexts/UserContext';
 
 export default function Navbar({ children }) {
-  const { isGuest, login, logout } = useUserContext();
+  const { isGuest, login, logout } = userContext();
 
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -34,11 +34,11 @@ export default function Navbar({ children }) {
             </li>
             <li className="nav-item">
               {isGuest ? (
-                <a href="javascript:void(0)" className="nav-link" onClick={() => login()}>
+                <a href="#" className="nav-link" onClick={() => login()}>
                   Login
                 </a>
               ) : (
-                <a href="javascript:void(0)" className="nav-link" onClick={() => logout()}>
+                <a href="#" className="nav-link" onClick={() => logout()}>
                   logout
                 </a>
               )}
