@@ -5,7 +5,7 @@ export default function DefaultLayout() {
   return (
     <div className="page-wrapper">
       <header>
-        <Navbar />
+        <Navbar>{import.meta.env.VITE_APP_NAME || 'React project'}</Navbar>
       </header>
 
       <main>

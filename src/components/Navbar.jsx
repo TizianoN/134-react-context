@@ -1,11 +1,14 @@
 import { NavLink } from 'react-router-dom';
+import { useUserContext } from '../contexts/UserContext';
 
-export default function Navbar() {
+export default function Navbar({ children }) {
+  const { isGuest, login, logout } = useUserContext();
+
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container">
         <a className="navbar-brand" href="#">
-          {import.meta.env.VITE_APP_NAME || 'React project'}
+          {children}
         </a>
         <button
           className="navbar-toggler"
@@ -28,6 +31,17 @@ export default function Navbar() {
               <NavLink className="nav-link" to="/about">
                 About
               </NavLink>
+            </li>
+            <li className="nav-item">
+              {isGuest ? (
+                <a href="javascript:void(0)" className="nav-link" onClick={() => login()}>
+                  Login
+                </a>
+              ) : (
+                <a href="javascript:void(0)" className="nav-link" onClick={() => logout()}>
+                  logout
+                </a>
+              )}
             </li>
           </ul>
         </div>
